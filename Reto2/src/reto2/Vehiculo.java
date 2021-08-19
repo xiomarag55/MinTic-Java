@@ -1,8 +1,7 @@
-
 package reto2;
 
-public class Vehiculo {
-    
+public abstract class Vehiculo {
+
     private String nombreConductor;
     private int nPasajeros = 0;
     private int nMaximoPasajeros;
@@ -13,54 +12,155 @@ public class Vehiculo {
     private boolean motorEncendido = false;
     private boolean wifiEncendido = false;
     private boolean enMarcha = false;
-    
-    public Vehiculo(){
-        
+
+    public Vehiculo() {
     }
-    public Vehiculo(String nombreConductor, int nMaximoPasajeros){
-        
-        this.nombreConductor  = nombreConductor;
+
+    public Vehiculo(String nombreConductor, int nMaximoPasajeros) {
+        this.nombreConductor = nombreConductor;
         this.nMaximoPasajeros = nMaximoPasajeros;
     }
-    
-    public void dejarPasajero(){
-        if (enMarcha == true){
-            nPasajeros = nPasajeros;
-            
-        }else{
-            nPasajeros -= 1;
+
+    public void dejarPasajero() {
+        nPasajeros -= 1;
+    }
+
+    public double calcularDistanciaAcopio() {
+        double distancia = Math.sqrt((localizacionX * localizacionX) + (localizacionY * localizacionY));
+        return distancia;
+
+    }
+
+    public void gestionarAireAcondicionado() {
+        if (motorEncendido && !aireAcondicionadoActivado) {
+            aireAcondicionadoActivado = true;
+        } else {
+            aireAcondicionadoActivado = false;
         }
-        
     }
-    public double calcularDistanciaAcopio(){
-        
+
+    public void gestionarMotor() {
+        if (!motorEncendido) {
+            motorEncendido = true;
+        } else {
+            wifiEncendido = false;
+            aireAcondicionadoActivado = false;
+            enMarcha = false;
+            motorEncendido = false;
+        }
     }
-    public void gestionarAireAcondicionado(){
-        
+
+    public void gestionarWifi() {
+        if (motorEncendido && !wifiEncendido) {
+            wifiEncendido = true;
+        } else {
+            wifiEncendido = false;
+        }
     }
-    public void gestionarMotor(){
-        
+
+    public abstract void gestionarMarcha();
+
+    public void moverDerecha(double d) {
+        if (enMarcha) {
+            localizacionX += d;
+        }
     }
-    public void gestionarWifi(){
-        
+
+    public void moverIzquierda(double d) {
+        if (enMarcha) {
+            localizacionX -= d;
+        }
     }
-    public void gestionarMarcha(){
-        if()
-        
+
+    public void moverArriba(double d) {
+        if (enMarcha) {
+            localizacionY += d;
+        }
     }
-    public void moverDerecha(double d){
-        
+
+    public void moverAbajo(double d) {
+        if (enMarcha) {
+            localizacionY -= d;
+        }
     }
-    public void moverIzquierda(double d){
-        
+
+    public String getNombreConductor() {
+        return nombreConductor;
     }
-    public void moverArriba(double d){
-        
+
+    public void setNombreConductor(String nombreConductor) {
+        this.nombreConductor = nombreConductor;
     }
-    public void moverAbajo(double d){
-        
+
+    public int getnPasajeros() {
+        return nPasajeros;
     }
-   
-    
-    
+
+    public void setnPasajeros(int nPasajeros) {
+        this.nPasajeros = nPasajeros;
+    }
+
+    public int getnMaximoPasajeros() {
+        return nMaximoPasajeros;
+    }
+
+    public void setnMaximoPasajeros(int nMaximoPasajeros) {
+        this.nMaximoPasajeros = nMaximoPasajeros;
+    }
+
+    public double getCantidadDinero() {
+        return cantidadDinero;
+    }
+
+    public void setCantidadDinero(double cantidadDinero) {
+        this.cantidadDinero = cantidadDinero;
+    }
+
+    public double getLocalizacionX() {
+        return localizacionX;
+    }
+
+    public void setLocalizacionX(double localizacionX) {
+        this.localizacionX = localizacionX;
+    }
+
+    public double getLocalizacionY() {
+        return localizacionY;
+    }
+
+    public void setLocalizacionY(double localizacionY) {
+        this.localizacionY = localizacionY;
+    }
+
+    public boolean isAireAcondicionadoActivado() {
+        return aireAcondicionadoActivado;
+    }
+
+    public void setAireAcondicionadoActivado(boolean aireAcondicionadoActivado) {
+        this.aireAcondicionadoActivado = aireAcondicionadoActivado;
+    }
+
+    public boolean isMotorEncendido() {
+        return motorEncendido;
+    }
+
+    public void setMotorEncendido(boolean motorEncendido) {
+        this.motorEncendido = motorEncendido;
+    }
+
+    public boolean isWifiEncendido() {
+        return wifiEncendido;
+    }
+
+    public void setWifiEncendido(boolean wifiEncendido) {
+        this.wifiEncendido = wifiEncendido;
+    }
+
+    public boolean isEnMarcha() {
+        return enMarcha;
+    }
+
+    public void setEnMarcha(boolean enMarcha) {
+        this.enMarcha = enMarcha;
+    }
 }
